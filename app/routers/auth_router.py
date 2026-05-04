@@ -7,8 +7,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import List
 
-from .. import models, schemas, auth
-from ..database import get_db
+import schemas, database, auth, models
+from database import get_db
 
 router = APIRouter(tags=["Kimlik Doğrulama"])
 

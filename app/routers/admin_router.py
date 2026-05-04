@@ -8,8 +8,8 @@ from sqlalchemy import func
 from datetime import date, timedelta
 from typing import List
 
-from .. import models, schemas, auth
-from ..database import get_db
+import models, schemas, database, auth
+from database import get_db
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
