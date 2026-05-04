@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i project/ansible/inventory.ini project/ansible/deploy.yml \
+          ansible-playbook -i ansible/inventory.ini ansible/deploy.yml \
           -e "docker_username=${{ secrets.DOCKER_HUB_USERNAME }}"
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
