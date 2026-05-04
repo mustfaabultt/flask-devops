@@ -2,18 +2,20 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Bağımlılıkları yükle
+# Bağımlılıklar
 COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt uvicorn
 
 # Tüm dosyaları kopyala
 COPY app/ .
 
-# Veri tabanı dosyasına yazma yetkisi ver (Kayıt olabilmek için şart!)
-RUN chmod 777 /app
+# Veri tabanı dosyasının tam orada olduğundan emin ol ve yetki ver
+RUN chmod -R 777 /app
 
-# Portu aç
+# Uygulamayı ÇALIŞTIRACAĞIMIZ KLASÖRE GİR
+WORKDIR /app/app
+
 EXPOSE 8000
 
-# Uygulamayı çalıştır
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Uygulamayı başlat
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
