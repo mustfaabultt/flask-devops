@@ -29,13 +29,16 @@ logger = logging.getLogger("mhrs")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Uygulama başlangıcında veritabanını hazırla."""
-    models.Base.metadata.create_all(bind=engine)
-    db = database.SessionLocal()
     try:
-        seed_data.populate_full_data(db)
-    finally:
-        db.close()
-    logger.info("MHRS uygulaması başlatıldı.")
+        models.Base.metadata.create_all(bind=engine)
+        db = database.SessionLocal()
+        try:
+            seed_data.populate_full_data(db)
+        finally:
+            db.close()
+        logger.info("MHRS uygulaması başarıyla başlatıldı.")
+    except Exception as e:
+        logger.error(f"Başlangıç hatası (yine de devam ediliyor): {e}")
     yield
     logger.info("MHRS uygulaması kapatılıyor.")
 
