@@ -1,7 +1,7 @@
 import random
 from sqlalchemy.orm import Session
 from datetime import date
-from . import models, auth
+import models, auth
 
 def populate_full_data(db: Session):
     """81 ili, hastaneleri, poliklinikleri ve doktorları veritabanına ekler."""
