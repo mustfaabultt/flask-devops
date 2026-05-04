@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SağlıkCepte - Yeni Nesil Mobil Sağlık ve Randevu Sistemi. Hızlı, güvenilir ve kolay randevu alımı.">
+    <title>SağlıkCepte | Sağlığınız Cebinizde</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1400px;margin:0 auto;padding:0 1.5rem;">
+            <a class="navbar-brand" href="#" onclick="location.reload()">
+                <i class="bi bi-heart-pulse-fill" style="color:#ff3b30;"></i><span style="color:#1c1c1e;">Sağlık</span><span style="color:var(--primary);">Cepte</span>
+            </a>
+            <div id="authLinks"></div>
+        </div>
+    </nav>
+
+    <!-- ========== AUTH SECTION ========== -->
+    <div id="authSection" class="auth-wrapper">
+        <div class="auth-container fade-in-up">
+            <!-- Brand Side -->
+            <div class="auth-brand">
+                <div class="brand-icon"><i class="bi bi-shield-check"></i></div>
+                <h1>SağlıkCepte</h1>
+                <p>Türkiye'nin en modern dijital sağlık asistanı. Randevularınız, tahlilleriniz ve sağlığınız artık tek tık uzağınızda.</p>
+                <div class="auth-stats">
+                    <div class="auth-stat">
+                        <div class="num">81</div>
+                        <div class="label">İl Geneli</div>
+                    </div>
+                    <div class="auth-stat">
+                        <div class="num">950+</div>
+                        <div class="label">Hastane</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Side -->
+            <div class="auth-form-area">
+                <!-- Login -->
+                <div id="loginFormWrapper">
+                    <h2 style="font-weight:800;margin-bottom:10px;">Giriş Yap</h2>
+                    <p class="subtitle">TC Kimlik numaranızla güvenle girin.</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label class="form-label-custom">TC Kimlik Numarası</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-person"></i>
+                                <input type="text" id="loginTC" class="form-input" required
+                                    pattern="\d{11}" maxlength="11" placeholder="11 Haneli TC Kimlik">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-custom">Şifre</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-lock"></i>
+                                <input type="password" id="loginPass" class="form-input" required
+                                    placeholder="••••••••">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary-custom" style="margin-top:0.5rem;">
+                            Giriş Yap <i class="bi bi-arrow-right-short"></i>
+                        </button>
+                    </form>
+                    <div style="text-align:center;margin-top:2rem;">
+                        <span style="color:var(--text-muted);font-size:0.85rem;">Hesabınız yok mu?</span>
+                        <button class="link-btn" id="showRegister" style="color:var(--primary);font-weight:700;border:none;background:none;cursor:pointer;margin-left:5px;">Hesap Oluştur</button>
+                    </div>
+                </div>
+
+                <!-- Register -->
+                <div id="registerFormWrapper" style="display:none;">
+                    <button class="link-btn" id="showLogin" style="margin-bottom:1.5rem;border:none;background:none;cursor:pointer;color:var(--text-muted);display:flex;align-items:center;gap:5px;">
+                        <i class="bi bi-arrow-left"></i> Vazgeç ve Dön
+                    </button>
+                    <h2 style="font-weight:800;margin-bottom:10px;">Yeni Kayıt</h2>
+                    <p class="subtitle">SağlıkCepte ile sağlığınızı yönetmeye başlayın.</p>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label class="form-label-custom">Ad Soyad</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-person-badge"></i>
+                                <input type="text" id="regName" class="form-input" required
+                                    placeholder="Örn: Mehmet Öz">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-custom">TC Kimlik</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-person-vcard"></i>
+                                <input type="text" id="regTC" class="form-input" required
+                                    pattern="\d{11}" maxlength="11" placeholder="11 Haneli TC">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-custom">Güvenli Şifre</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-shield-lock"></i>
+                                <input type="password" id="regPass" class="form-input" required
+                                    minlength="6" placeholder="En az 6 karakter">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary-custom" style="margin-top:0.5rem;background:var(--success);">
+                            Üye Ol ve Başla
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== DASHBOARD SECTION ========== -->
+    <div id="dashboardSection" style="display:none;" class="dashboard-wrapper fade-in">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebarArea">
+            <div class="sidebar-header" id="sidebarHeader"></div>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
+            
+            <!-- Health Summary (E-Nabız Style) -->
+            <div class="health-card" id="healthCard" style="display:none;">
+                <h6><i class="bi bi-clipboard2-pulse"></i> Sağlık Özeti</h6>
+                <div class="health-row">
+                    <span class="label">Kan Grubu</span>
+                    <span class="value" id="sumBloodType" style="color:var(--danger)">-</span>
+                </div>
+                <div class="health-row">
+                    <span class="label">Vücut Kitle Endeksi</span>
+                    <span class="value" id="sumBMI">-</span>
+                </div>
+                <div class="health-row">
+                    <span class="label">Boy / Kilo</span>
+                    <span class="value" id="sumHeightWeight">-</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Content rendered by JS -->
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>

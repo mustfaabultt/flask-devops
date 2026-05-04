@@ -1,12 +1,16 @@
-FROM python:3.10-slim
+FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY app/requirements.txt .
+# Bağımlılıkları yükle
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app/ .
+# Tüm dosyaları kopyala
+COPY . .
 
+# Flask'ın çalışacağı portu aç
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+# Uygulamayı çalıştır (Ana dosya app/main.py olduğu için yolu belirttik)
+CMD ["python", "app/main.py"]
