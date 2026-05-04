@@ -1,0 +1,34 @@
+---
+- name: Deploy Flask App with Docker
+  hosts: web
+  become: yes
+  tasks:
+    - name: Update apt and install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker is running
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Remove old container if exists
+      docker_container:
+        name: flask-app
+        state: absent
+
+    - name: Pull latest image from Docker Hub
+      docker_image:
+        name: "{{ lookup('env', 'DOCKER_HUB_USERNAME') }}/flask-app:latest"
+        source: pull
+
+    - name: Run new container
+      docker_container:
+        name: flask-app
+        image: "{{ lookup('env', 'DOCKER_HUB_USERNAME') }}/flask-app:latest"
+        state: started
+        ports:
+          - "80:5000"
