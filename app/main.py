@@ -55,7 +55,7 @@ app.add_middleware(
 )
 
 # Statik dosyalar
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Router'ları ekle
 app.include_router(auth_router.router)
@@ -77,7 +77,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 @app.get("/")
 async def read_index():
     """Ana sayfa (index.html) döner."""
-    return FileResponse("app/static/index.html")
+    return FileResponse("static/index.html")
 
 
 @app.get("/health")

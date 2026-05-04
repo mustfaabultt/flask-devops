@@ -2,20 +2,18 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Gerekli sistem paketleri
-RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
-
 # Bağımlılıklar
 COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt uvicorn
 
-# Tüm dosyaları kopyala
+# Her şeyi kopyala
 COPY app/ .
 
-# Veri tabanına ve klasöre tam yetki ver
+# Veri tabanı ve her şeye yazma yetkisi
 RUN chmod -R 777 /app
 
 EXPOSE 8000
 
-# Uygulamayı ÇALIŞTIR (Artık her şey aynı klasörde olduğu için yol çok basit)
+# Uygulamayı başlat (Klasör karmaşasını bitirmek için PYTHONPATH ekledik)
+ENV PYTHONPATH=/app
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
