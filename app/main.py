@@ -9,10 +9,10 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from .config import APP_TITLE, APP_VERSION, APP_DESCRIPTION, CORS_ORIGINS
-from .database import engine
-from . import models, database, seed_data
-from .routers import auth_router, appointment_router, location_router, admin_router
+from config import APP_TITLE, APP_VERSION, APP_DESCRIPTION, CORS_ORIGINS
+from database import engine
+import models, database, seed_data
+from routers import auth_router, appointment_router, location_router, admin_router
 
 # Logging konfigürasyonu
 logging.basicConfig(
