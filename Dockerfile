@@ -2,26 +2,20 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Gerekli sistem paketlerini kur
+# Gerekli sistem paketleri
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
 
 # Bağımlılıklar
 COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt uvicorn
 
-# TÜM DOSYALARI kopyala
+# Tüm dosyaları kopyala
 COPY app/ .
 
-# VERİ TABANINI KODLARIN YANINA TAŞI (Hata buradaydı!)
-RUN cp mhrs.db app/mhrs.db || true
-
-# YETKİLERİ VER
+# Veri tabanına ve klasöre tam yetki ver
 RUN chmod -R 777 /app
-
-# Uygulamayı çalıştıracağımız yere gir
-WORKDIR /app/app
 
 EXPOSE 8000
 
-# Uygulamayı ÇALIŞTIR
+# Uygulamayı ÇALIŞTIR (Artık her şey aynı klasörde olduğu için yol çok basit)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
